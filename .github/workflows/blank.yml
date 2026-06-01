@@ -5,7 +5,7 @@ env:
 
 jobs:
   display-variables:
-    name: <USE ENVIRONMENT_VAR HERE>
+    name: ENVIRONMENT_VAR
     runs-on: ubuntu-latest
     steps:
     - name: Use variables 1
