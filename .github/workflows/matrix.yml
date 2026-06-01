@@ -1,4 +1,4 @@
-name: dispatch
+name: dispatch_matrix
 on:
   workflow_dispatch:
     inputs:
