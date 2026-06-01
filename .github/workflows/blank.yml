@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
 
 env:
-  cat_name: "Puszek"
+  cat_name: "Almamater"
   WORKFLOW_VAR: "workflow scoped value"
 
 jobs:
