@@ -1,4 +1,4 @@
-name: dispatch_matrix
+name: dispatch
 on:
   workflow_dispatch:
     inputs:
@@ -15,14 +15,22 @@ on:
         description: 'Environment to run against'
         type: environment
         required: true
+      matrix:
+        description: 'Matrix strategy as JSON'
+        type: string
+        required: true
 
 jobs:
   log-the-inputs:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix: ${{ fromJSON(inputs.matrix) }}
     steps:
-      - run: |
+      - name: Print inputs and matrix combination
+        run: |
           echo "Log level: $LEVEL"
           echo "Environment: $ENVIRONMENT"
+          echo "Running with version=${{ matrix.version }} on os=${{ matrix.os }}"
         env:
           LEVEL: ${{ inputs.logLevel }}
           ENVIRONMENT: ${{ inputs.environment }}
