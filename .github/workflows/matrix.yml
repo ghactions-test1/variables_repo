@@ -2,7 +2,19 @@ name: dispatch
 on:
   workflow_dispatch:
     inputs:
-
+      logLevel:
+        description: 'Log level'
+        required: true
+        type: choice
+        default: warning
+        options:
+          - info
+          - warning
+          - debug
+      environment:
+        description: 'Environment to run against'
+        type: environment
+        required: true
 
 jobs:
   log-the-inputs:
