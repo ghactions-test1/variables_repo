@@ -1,0 +1,51 @@
+# This is a basic workflow to help you get started with Actions
+
+name: passing job values
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:
+  pass_in_one_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set color
+        id: color-selector
+        run: <SET VARIABLE>
+      - name: Get color
+        run: echo "The selected color is $COLOR"
+        
+  producer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make a sentence
+        id: sentence_maker
+        run: |
+            # TODO: SET ENVIRONMENT VARIABLE
+
+  consumer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the message
+        run: |
+          echo $message
+
+  job_1:
+    name: Add 3 and 7
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: |
+          expr 3 + 7 > <RESULT_FILE_NAME>
+
+  job_2:
+    name: Multiply by 9
+    needs: job_1
+    runs-on: windows-latest
+    steps:
+      - shell: bash
+        run: |
+          value=`cat <ARTIFACT_FILE_NAME>`
+          echo $(expr $value \* 9) 
