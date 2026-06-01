@@ -24,16 +24,16 @@ jobs:
         echo "Organization variable : $ORGANIZATION_VAR"
         echo "Environment variable : $ENVIRONMENT_VAR"
         echo "Alice has a cat named $cat_name"
-        echo "Should be variable in workflow scope:$WORKFLOW_VAR"
-        echo "Should be variable in job scope:$JOB_VAR"
-        echo "Should be variable in step scope:$STEP_VAR"
+        echo "Should be variable in workflow scope: $WORKFLOW_VAR"
+        echo "Should be variable in job scope: $JOB_VAR"
+        echo "Should be variable in step scope: $STEP_VAR"
 
     - name: Use variables 2
       run: |
         echo "Alice has a cat named $cat_name"
-        echo "Should be variable in workflow scope:$WORKFLOW_VAR"
-        echo "Should be variable in job scope:$JOB_VAR"
-        echo "Should NOT be variable in step scope:$STEP_VAR"
+        echo "Should be variable in workflow scope: $WORKFLOW_VAR"
+        echo "Should be variable in job scope: $JOB_VAR"
+        echo "Should NOT be variable in step scope: $STEP_VAR"
 
     - name: Print all environment variables
       run: env
