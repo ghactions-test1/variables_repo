@@ -1,0 +1,55 @@
+name: Deployment with Manual Approval
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build application
+        run: |
+          echo "Building application..."
+          echo "Build artifact: app-${{ github.sha }}"
+
+  deploy-staging:
+    needs: build
+    runs-on: ubuntu-latest
+    # TODO: Add environment 'staging' (no protection rules — auto deploy)
+    steps:
+      - name: Deploy to staging
+        run: echo "Deployed to staging"
+
+  test-staging:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run smoke tests on staging
+        run: |
+          echo "Running smoke tests..."
+          echo "All tests passed"
+
+  # TODO: Add an 'approve-production' job
+  # - needs: test-staging
+  # - environment: production-approval (with required reviewer + wait timer)
+  # - steps: echo a confirmation
+
+  deploy-production:
+    # TODO: Change needs to approve-production
+    needs: test-staging
+    runs-on: ubuntu-latest
+    # TODO: Add environment 'production' with URL
+    steps:
+      - name: Deploy to production
+        run: echo "Deployed to production"
+
+  post-deploy:
+    needs: deploy-production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify production
+        run: echo "Production smoke tests passed"
+      # TODO: Add a Job Summary with the pipeline history
